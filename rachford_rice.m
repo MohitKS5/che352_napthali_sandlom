@@ -1,6 +1,6 @@
 % takes F,k[c] and z[c] array and returns V,L,x[c],y[c]
 function [L,V,x,y] = rachford_rice(F,k,z)
-    c = len(k);
+    c = length(k);
     f=@(phi) 0;
     for i=1:c
         f = @(phi) f(phi)+z(i)*(k(i)-1)/(1+phi*(k(i)-1));
