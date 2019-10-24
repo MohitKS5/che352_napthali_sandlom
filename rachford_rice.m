@@ -1,4 +1,4 @@
-% takes F,k[c] and z[c] array and returns V,L,x[c],y[c]
+%% takes F,k[c] and z[c] array and returns V,L,x[c],y[c]
 function [L,V,x,y] = rachford_rice(F,k,z)
     c = length(k);
     f=@(phi) 0;
