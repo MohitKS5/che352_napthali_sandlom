@@ -44,4 +44,18 @@ for i=1:c
 end
 
 %% begin napthali sandlom
+tau = 1;
+epsilon = inf;
+while(epsilon>tau)
+    % MEH equations
+    M = zeros(c,n);
+    E = zeros(c,n);
+    H = zeros(c,n);
+    for j=1:n
+        M(:,j)=M_j(X,F,j);
+    end
+    
+    % to close the loop for now
+    epsilon = 0;
+end
 

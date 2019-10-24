@@ -1,6 +1,8 @@
 %% fugacity coefficient using Redlich Kwong Equation of state
+% takes P in bar , T in K and x[c]
 function phi = fugacity(P,T,x)
     c=5;
+    P = P*10^5;
     % NIST database critical T and P
     Pc = [81 48 47.5 48.9 53.2868]*10^5; %in Pa
     Tc = [513 508 510 562 537]; %in Kelvin
