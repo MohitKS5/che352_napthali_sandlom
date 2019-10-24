@@ -1,6 +1,7 @@
  %% takes (T,P) and returns (Psat, k)
-function [Psat,k] = antoine(T,P)
+function [Psat,k] = antoine(T)
     c=5;
+    P=1.01325;
     
     % from nist database
     A=[5.20409 4.42448 4.20364 4.72583 4.20772];

@@ -1,3 +1,5 @@
+%% takes x and T and returns activity coefficients
+function [gamma]=wilson(T,x)
     %given
     c=5;
     aij=[
@@ -23,4 +25,5 @@
         t = sum(x.*A(:,i)./summation);
         gamma(i)=exp(1-log(summation(i))-t);
     end
-   
+end
+

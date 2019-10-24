@@ -30,7 +30,7 @@ for i=1:n
 end
 
 % calc k using antoine at feed stage (T,P)
-[~,k]=antoine(X(c+1,feed_stage),P(feed_stage));
+[~,k]=antoine(X(c+1,feed_stage));
 [L,V,x,y]=rachford_rice(total_feed, k, Z(:,feed_stage));
 
 % molar flows
@@ -40,7 +40,7 @@ v=y.*V;
 % use values obtained as intitial guesses
 for i=1:c
     X(i,:)=v(i);
-    X(i+6,:)=l(i);
+    X(i+c+1,:)=l(i);
 end
 
 %% begin napthali sandlom
@@ -53,6 +53,7 @@ while(epsilon>tau)
     H = zeros(c,n);
     for j=1:n
         M(:,j)=M_j(X,F,j);
+        E(:,j)=E_j(X,j);
     end
     
     % to close the loop for now
