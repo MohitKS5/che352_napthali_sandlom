@@ -37,7 +37,7 @@ end
 l=x.*L;
 v=y.*V;
 
-% use values obtained as intitial guesses
+% use values obtained as initial guesses
 for i=1:c
     X(i,:)=v(i);
     X(i+c+1,:)=l(i);
