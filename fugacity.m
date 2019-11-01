@@ -31,7 +31,7 @@ function phi = fugacity(T,x)
     polyn = [1,-1,((A^2)*P-B*P*(1 + B*P)),(-1*(A*P)^2*B)];
     r = roots(polyn);
     % extract the real positive(so max) value
-    r =r(imag(r)==0);
+    r =r(imag(r)<10^-10);
     z=max(r);
     % calc fugacities
     phi = zeros(1,c);

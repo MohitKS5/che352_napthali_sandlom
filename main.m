@@ -44,20 +44,62 @@ for i=1:c
 end
 
 %% begin napthali sandlom
+latent_heat_F=H_V(F(:,7)./100,330);
+
+% form a vector for newton raphson from X
+X_Vector=X(:,1)';
+for i=2:19
+    X_Vector= horzcat(X_Vector, X(:,i)');
+end
+iter=1;
 tau = 1;
 epsilon = inf;
-while(epsilon>tau)
+while(true)
     % MEH equations
     M = zeros(c,n);
     E = zeros(c,n);
     H = zeros(c,n);
+    X
     for j=1:n
         M(:,j)=M_j(X,F,j);
         E(:,j)=E_j(X,j);
         H(:,j)=H_j(X,j);
     end
     
-    % to close the loop for now
-    epsilon = 0;
+    %function vector and matrix
+    FunV=zeros(1,1); % dummy var
+    FunMat=zeros((2*c+1),n);
+    for j=1:n
+        FunMat(1,j)=H(j);
+        for i=1:c
+            FunMat(1+i,j)=M(i,j);
+            FunMat(1+c+i,j)=E(i,j);
+        end
+        FunV=horzcat(FunV,FunMat(:,j)');
+    end
+    FunV(1)=[]; % remove 1st dummy var
+    
+    % differential
+    dfdx = Calc_dfdx(X,F);
+    
+    tau_old=tau;
+    tau=sum(sum(H.^2)/(latent_heat_F^2)+sum(sum(M.^2))+sum(sum(E.^2)));
+    epsilon=(sum(H.^2)+sum(sum(M.^2))+sum(sum(E.^2)))*n*(2*c+1)*(10^-10);
+    
+    Xnew=X_Vector'-dfdx\FunV';%% updating X
+    X_Vector = Xnew';
+    
+    % converting X vector to matrix form
+    for i=1:n
+        X(:,i)=Xnew(1+(2*c+1)*(i-1):(2*c+1)*i)';
+    end
+    
+    if abs(tau_old-tau)<(10^-5)
+       break
+    end
+    iter=iter+1
 end
+
+
+
 

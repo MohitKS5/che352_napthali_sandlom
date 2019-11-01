@@ -5,17 +5,14 @@ function [ H ] = H_j(X,j)
     n=19;
     B=62;
     reflux=9.5;
-    H = zeros(c,1);
     L_sum = zeros(1,3);
     V_sum = zeros(1,3);
     h_Liq = zeros(1,3);
     h_Vap = zeros(1,3);
     if j==1
-        H = X(c+2:2*c+1,1) - (reflux/(reflux+1))*X(1:c,1);
+        H = sum(X(c+2:2*c+1,1)) - (reflux/(reflux+1))*sum(X(1:c,1));
     elseif j==19
-        for i=1:c
-            H(i)= X(c+1+i,n)-B;
-        end
+        H= sum(X(c+2:2*c+1,n))-B;
     else
         for i=j-1:j+1
             L_sum(i) = sum(X(c+2:2*c+1, i));
