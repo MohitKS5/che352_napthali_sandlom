@@ -1,4 +1,4 @@
-function [ dep ] = dep_V( y, T_stage )
+function [ dep ] = dep_V( x, T_stage )
     c=5;
     P = 101325;
     % NIST database critical T and P
@@ -17,18 +17,18 @@ function [ dep ] = dep_V( y, T_stage )
     b_m = 0;
     for i=1:c
         for j=1:c
-            a_m + a_m + x(i)*x(j)*((ai(i)*ai(k))^0.5);
+            a_m + a_m + x(i)*x(j)*((ai(i)*ai(j))^0.5);
         end
         b_m = b_m + x(i)*bi(i);
     end
     t1 = -1*R*T_stage;
-    t2 = a_m/(T_stage^0.5) - R*T*b_m - P*(b_m^2);
+    t2 = a_m/(T_stage^0.5) - R*T_stage*b_m - P*(b_m^2);
     t3 = -1*(a_m*b_m)/(T_stage^0.5);
     e = [P t1 t2 t3];
     r = roots(e);
     r = r(imag(r) == 0);
     V = max(r);
-    z = (P*V)/(R*T);
+    z = (P*V)/(R*T_stage);
     dep = R*T_stage*(-1 + z -(3*a_m*log(1+b_m/z)/(2*b_m)));
 end
 

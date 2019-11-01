@@ -54,6 +54,7 @@ while(epsilon>tau)
     for j=1:n
         M(:,j)=M_j(X,F,j);
         E(:,j)=E_j(X,j);
+        H(:,j)=H_j(X,j);
     end
     
     % to close the loop for now

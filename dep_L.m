@@ -5,6 +5,7 @@ function [ dep ] = dep_L(x, T_stage )
     Pc = [81 48 47.5 48.9 53.2868]*10^5; %in Pa
     Tc = [513 508 510 562 537]; %in Kelvin
     Vm = [40.73; 74.05; 79.84;89.41;80.67].*10^-6; %in m^3/mol
+    
     % parameters of pure component Redlich Kwong Equation of State
     ai = zeros(5,1);
     bi = zeros(5,1); 
@@ -17,13 +18,13 @@ function [ dep ] = dep_L(x, T_stage )
     V = 0;
     for i=1:c
         V = V + x(i)*Vm(i);
-    end;
+    end
     z = P*V/(R*T_stage);
     a_m = 0;
     b_m = 0;
     for i=1:c
         for j=1:c
-            a_m + a_m + x(i)*x(j)*((ai(i)*ai(k))^0.5);
+            a_m = a_m + x(i)*x(j)*((ai(i)*ai(j))^0.5);
         end
         b_m = b_m + x(i)*bi(i);
     end
